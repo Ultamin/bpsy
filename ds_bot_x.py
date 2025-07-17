@@ -6,6 +6,10 @@ from datetime import datetime
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext, CallbackQueryHandler
 from collections import defaultdict
+from dotenv import load_dotenv
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
+
 
 # Настройка логирования
 logging.basicConfig(
