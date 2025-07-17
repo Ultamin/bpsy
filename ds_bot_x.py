@@ -255,8 +255,13 @@ async def button_handler(update: Update, context: CallbackContext):
 
 # Основная функция
 def main():
-    # Создаём приложение и передаём токен бота
-    application = Application.builder().token("BOT_TOKEN").build()
+    # Проверяем загрузку токена
+    if not TOKEN:
+        logger.error("Токен бота не найден! Проверьте .env файл.")
+        exit(1)
+    
+    # Создаём приложение с корректным токеном
+    application = Application.builder().token(TOKEN).build()
 
     # Регистрируем обработчики команд и сообщений
     application.add_handler(CommandHandler("start", start))
@@ -264,6 +269,7 @@ def main():
     application.add_handler(CallbackQueryHandler(button_handler))
 
     # Запускаем бота
+    logger.info("Бот запущен")
     application.run_polling()
 
 # Запуск скрипта
